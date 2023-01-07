@@ -85,4 +85,4 @@ document
     }
   });
 
-weather.fetchWeather("Denver");
+weather.fetchWeather("Lviv");
