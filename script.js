@@ -1,13 +1,11 @@
 let weather = {
   apiKey: "d3480ae5135e7dbe5ba737ee3bdbd366",
   fetchWeather: function (city) {
-    fetch(
-        "https://api.openweathermap.org/data/2.5/weather?q=" +
-        city +
-        "&units=metric&appid=" +
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" +city + "&units=metric&cnt=1-7&appid=" +
         this.apiKey
       )
       .then((response) => {
+       
         if (!response.ok) {
            alert(`No ${city} found.`);
           throw new Error("No weather found.");
@@ -17,6 +15,8 @@ let weather = {
       .then((data) => this.displayWeather(data));
   },
   displayWeather: function (data) {
+
+    console.log(data)
     const {
       name
     } = data;
@@ -45,27 +45,27 @@ let weather = {
       "url('https://source.unsplash.com/1600x900/?" + name + "')";
     // document.querySelector(".info").innerHTML = weatherToDay(degree);
 
-    function weatherToDay(t) {
-      if (t >= 20) {
-        console.log('Today is very hot!');
-        return 'Today is very hot!';
-      } else if (t <= 15) {
-        console.log('Today is cold!');
-        return 'Today is cold!';
-      } else {
-        console.log('Today is nice day!');
-        return 'Today is nice day!';
-      }
-      return t;
-    }
+    // function weatherToDay(t) {
+    //   if (t >= 20) {
+    //     console.log('Today is very hot!');
+    //     return 'Today is very hot!';
+    //   } else if (t <= 15) {
+    //     console.log('Today is cold!');
+    //     return 'Today is cold!';
+    //   } else {
+    //     console.log('Today is nice day!');
+    //     return 'Today is nice day!';
+    //   }
+    //   return t;
+    // }
 
     let str = document.querySelector(".temp").innerText.slice(0, -2);
     let degree = Number(str)
-    document.querySelector(".info").innerHTML = weatherToDay(degree);
-    console.log(degree);
+    // document.querySelector(".info").innerHTML = weatherToDay(degree);
+    // console.log(degree);
 
-    weatherToDay(degree);
-    console.log('Temperature - ' + degree + '°C');
+    // weatherToDay(degree);
+    // console.log('Temperature - ' + degree + '°C');
 
   },
   search: function () {
@@ -86,3 +86,6 @@ document
   });
 
 weather.fetchWeather("Lviv");
+
+
+
