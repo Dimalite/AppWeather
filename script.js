@@ -26,6 +26,8 @@ let weather = {
     } = data.weather[0];
     const {
       temp,
+      temp_max,
+      temp_min,
       humidity
     } = data.main;
     const {
@@ -36,39 +38,29 @@ let weather = {
       "https://openweathermap.org/img/wn/" + icon + ".png";
     document.querySelector(".description").innerText = description;
     document.querySelector(".temp").innerText = Math.round(temp) + "°C";
+
+    // document.querySelector(".max").innerText = "max.t: " + temp_max;
+    let max = Math.round(temp_max);
+document.querySelector(".max").innerHTML = "max: " + Math.ceil(temp_max) + "°c";
+document.querySelector(".min").innerHTML = "min: " + Math.ceil(temp_min) + "°c";
+
     document.querySelector(".humidity").innerText =
       "Humidity: " + humidity + "%";
     document.querySelector(".wind").innerText =
       "Wind speed: " + speed + " km/h";
     document.querySelector(".weather").classList.remove("loading");
-    document.body.style.backgroundImage =
-      "url('https://source.unsplash.com/1600x900/?" + name + "')";
+   
+    document.querySelector(".info").innerHTML = today();
 
-      let aroundTemp = Math.round(temp);
-      console.log(aroundTemp)
-      let str = document.querySelector(".temp").innerText.slice(0, -2);
-      let degree = Number(str)
-    document.querySelector(".info").innerHTML = weatherToDay(degree);
+    function today(){
+      const today = new Date();
+      const dataDay = today.getDate();
+      const dataMonth = today.getMonth();
+      const dataYear = today.getFullYear();
 
-    function weatherToDay(t) {
-      if (t >= 20) {
-        console.log('Today is very hot!');
-        return 'Today is very hot!';
-      } else if (t <= 15) {
-        console.log('Today is cold!');
-        return 'Today is cold!';
-      } else {
-        console.log('Today is nice day!');
-        return 'Today is nice day!';
-      }
-      return t;
+      return `${dataDay}.${dataMonth}.${dataYear}`
     }
 
-    // document.querySelector(".info").innerHTML = weatherToDay(degree);
-    // console.log(degree);
-
-    // weatherToDay(degree);
-    // console.log('Temperature - ' + degree + '°C');
 
   },
   search: function () {
@@ -88,7 +80,7 @@ document
     }
   });
 
-weather.fetchWeather("Lviv");
+weather.fetchWeather("Kiev");
 
 
 
